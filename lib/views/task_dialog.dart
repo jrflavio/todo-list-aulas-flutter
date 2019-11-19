@@ -11,6 +11,7 @@ class TaskDialog extends StatefulWidget {
 }
 
 class _TaskDialogState extends State<TaskDialog> {
+  final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
 
@@ -38,34 +39,52 @@ class _TaskDialogState extends State<TaskDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.task == null ? 'Nova tarefa' : 'Editar tarefas'),
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          TextField(
-              controller: _titleController,
-              decoration: InputDecoration(labelText: 'Título'),
-              autofocus: true),
-          TextField(
-              controller: _descriptionController,
-              decoration: InputDecoration(labelText: 'Descrição')),
-        ],
+      title: Text(widget.task == null ? 'New Task' : 'Edit edit'),
+      content: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            new TextFormField(
+                controller: _titleController,
+                decoration: InputDecoration(labelText: 'Title'),
+                autofocus: true,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Enter a title';
+                  }
+                  return null;
+                }),
+            TextFormField(
+                keyboardType: TextInputType.multiline,
+                controller: _descriptionController,
+                decoration: InputDecoration(labelText: 'Description'),
+                maxLines: null,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Enter a description';
+                  }
+                  return null;
+                }),
+          ],
+        ),
       ),
       actions: <Widget>[
         FlatButton(
-          child: Text('Cancelar'),
+          child: Text('Cancel'),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         FlatButton(
-          child: Text('Salvar'),
+          child: Text('Save'),
           onPressed: () {
-            _currentTask.title = _titleController.value.text;
-            _currentTask.description = _descriptionController.text;
-
-            Navigator.of(context).pop(_currentTask);
+            if (_formKey.currentState.validate()) {
+              _currentTask.title = _titleController.value.text;
+              _currentTask.description = _descriptionController.text;
+              Navigator.of(context).pop(_currentTask);
+            }
           },
         ),
       ],

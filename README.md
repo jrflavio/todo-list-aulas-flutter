@@ -1,26 +1,24 @@
-# Lista de Tarefas
+# Calculadora de IMC
 
-Aplicativo para gerenciar as tarefas do dia-a-dia criado para disciplina de Programação Mobile.
-
-Tutorial de criação deste app: http://bit.ly/2jXXU7Q
+Aplicativo de uma calculadora de IMC criado para disciplina de Programação Mobile.
 
 <p align="center">
-    <img src="https://miro.medium.com/max/1440/1*oUhhTFGunBMuh4Av-7rR7A.png" width="800"/>
+    <img src="https://github.com/jrflavio/todo-list-aulas-flutter/blob/master/images/screenshot_1.png" height="400"/>
+	<img src="https://github.com/jrflavio/todo-list-imc-aulas-flutter/blob/master/images/screenshot_2.png" height="400"/>
+	<img src="https://github.com/jrflavio/todo-list-imc-aulas-flutter/blob/master/images/screenshot_3.png" height="400"/>
 </p>
 
-## Como clonar e importar
+## Alunos
+-	Flávio Júnior
+-	Gustavo Messias
 
--   Faça um fork do projeto
--   Abra o terminal do Visual Studio Code
--   Digite (troque kleberandrade pelo nome do seu usuários): git clone https://github.com/kleberandrade/todo-list-aulas-flutter todo_list
+## Desafio para aula
 
-## Desafios
-
--   Na lista de tarefas, adicionar divisões entre as linhas (use [ListView.separated](https://api.flutter.dev/flutter/widgets/ListView/ListView.separated.html))
--   Adicionar validações no cadastro de uma atividade (lembre-se que é preciso utilizar o widget [TextFormField](https://api.flutter.dev/flutter/material/TextFormField-class.html) para isso)
--   Campo descrição precisar aceitar múltiplas linhas
--   Criar um campo para nível de prioridades que aceita valores entre 1 (baixa prioridade) e 5 (alta prioridade). Representar isso no card da forma como achar mais interessante.
--   Adicionar um [PercentIndicator](https://pub.dev/packages/percent_indicator) circular na barra de navegação para indicar a porcentagem de tarefas concluídas
+- [X] Na lista de tarefas, adicionar divisões entre as linhas;
+- [X] Adicionar validações no cadastro de uma atividade;
+- [X] Campo descrição precisar aceitar múltiplas linhas;
+- [] Criar um campo para nível de prioridades que aceita valores entre 1 (baixa prioridade) e 5 (alta prioridade);
+- [X] Adicionar um PercentIndicator circular na barra de navegação para indicar a porcentagem de tarefas concluídas
 
 ## Licença
 

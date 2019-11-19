@@ -1,3 +1,4 @@
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -14,6 +15,9 @@ class _HomePageState extends State<HomePage> {
   List<Task> _taskList = [];
   TaskHelper _helper = TaskHelper();
   bool _loading = true;
+  double _indicator = 0.0;
+  double _percent = 0.0;
+  int _checkedTasks = 0;
 
   @override
   void initState() {
@@ -29,7 +33,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Lista de Tarefas')),
+      appBar: AppBar(
+        title: Text('Task List'),
+        actions: <Widget>[
+          new LinearPercentIndicator(
+            width: 140.0,
+            lineHeight: 14.0,
+            percent: _indicator,
+            backgroundColor: Colors.white,
+            progressColor: Colors.cyanAccent,
+          ),
+        ],
+      ),
       floatingActionButton:
           FloatingActionButton(child: Icon(Icons.add), onPressed: _addNewTask),
       body: _buildTaskList(),
@@ -39,12 +54,13 @@ class _HomePageState extends State<HomePage> {
   Widget _buildTaskList() {
     if (_taskList.isEmpty) {
       return Center(
-        child: _loading ? CircularProgressIndicator() : Text("Sem tarefas!"),
+        child: _loading ? CircularProgressIndicator() : Text("No tasks!"),
       );
     } else {
-      return ListView.builder(
-        itemBuilder: _buildTaskItemSlidable,
+      return ListView.separated(
+        separatorBuilder: (BuildContext context, int index) => Divider(),
         itemCount: _taskList.length,
+        itemBuilder: _buildTaskItemSlidable,
       );
     }
   }
@@ -54,9 +70,25 @@ class _HomePageState extends State<HomePage> {
     return CheckboxListTile(
       value: task.isDone,
       title: Text(task.title),
-      subtitle: Text(task.description),
+      subtitle: Text('${task.description}'),
       onChanged: (bool isChecked) {
         setState(() {
+          _percent = 1.0 / _taskList.length;
+            if(isChecked){
+              _checkedTasks++;
+              if(_indicator + _percent > 1.0){_indicator = 1.0;}
+              else
+                _indicator += _percent;
+            }
+            else
+            if(isChecked == false){
+              _checkedTasks--;
+              if(_checkedTasks ==0){_indicator = 0.0;}
+              else
+              if(_indicator - _percent < 0.0){_indicator = 0.0;}
+              else
+                _indicator -= _percent;
+            }
           task.isDone = isChecked;
         });
 
@@ -72,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       child: _buildTaskItem(context, index),
       actions: <Widget>[
         IconSlideAction(
-          caption: 'Editar',
+          caption: 'Edit',
           color: Colors.blue,
           icon: Icons.edit,
           onTap: () {
@@ -80,11 +112,15 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         IconSlideAction(
-          caption: 'Excluir',
+          caption: 'Delete',
           color: Colors.red,
           icon: Icons.delete,
           onTap: () {
             _deleteTask(deletedTask: _taskList[index], index: index);
+            if(_indicator - _percent < 0.0){_indicator = 0.0;}
+            else
+            _indicator -= _percent;
+            _checkedTasks--;
           },
         ),
       ],
@@ -121,14 +157,14 @@ class _HomePageState extends State<HomePage> {
     _helper.delete(deletedTask.id);
 
     Flushbar(
-      title: "Exclusão de tarefas",
-      message: "Tarefa \"${deletedTask.title}\" removida.",
+      title: "Delete task",
+      message: "Task \"${deletedTask.title}\" deleted.",
       margin: EdgeInsets.all(8),
       borderRadius: 8,
       duration: Duration(seconds: 3),
       mainButton: FlatButton(
         child: Text(
-          "Desfazer",
+          "Undo",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         onPressed: () {
