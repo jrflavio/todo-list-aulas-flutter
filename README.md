@@ -1,23 +1,23 @@
-# Calculadora de IMC
+# Lista de Tarefas
 
-Aplicativo de uma calculadora de IMC criado para disciplina de Programação Mobile.
+Aplicativo para gerenciar as tarefas do dia-a-dia criado para disciplina de Programação Mobile.
 
 <p align="center">
     <img src="https://github.com/jrflavio/todo-list-aulas-flutter/blob/master/images/screenshot_1.png" height="400"/>
-	<img src="https://github.com/jrflavio/todo-list-imc-aulas-flutter/blob/master/images/screenshot_2.png" height="400"/>
-	<img src="https://github.com/jrflavio/todo-list-imc-aulas-flutter/blob/master/images/screenshot_3.png" height="400"/>
+	<img src="https://github.com/jrflavio/todo-list-aulas-flutter/blob/master/images/screenshot_2.png" height="400"/>
+	<img src="https://github.com/jrflavio/todo-list-aulas-flutter/blob/master/images/screenshot_3.png" height="400"/>
 </p>
 
 ## Alunos
--	Flávio Júnior
--	Gustavo Messias
+-	Flávio Júnior - 0040481821004
+-	Gustavo Messias - 0040481821039
 
 ## Desafio para aula
 
 - [X] Na lista de tarefas, adicionar divisões entre as linhas;
 - [X] Adicionar validações no cadastro de uma atividade;
 - [X] Campo descrição precisar aceitar múltiplas linhas;
-- [] Criar um campo para nível de prioridades que aceita valores entre 1 (baixa prioridade) e 5 (alta prioridade);
+- Criar um campo para nível de prioridades que aceita valores entre 1 (baixa prioridade) e 5 (alta prioridade);
 - [X] Adicionar um PercentIndicator circular na barra de navegação para indicar a porcentagem de tarefas concluídas
 
 ## Licença
